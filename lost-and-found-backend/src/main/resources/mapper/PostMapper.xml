@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lostfound.mapper.PostMapper">
+    <resultMap id="BaseResultMap" type="com.example.lostfound.entity.Post">
+        <id column="post_id" property="postId"/>
+        <result column="user_id" property="userId"/>
+        <result column="type" property="type"/>
+        <result column="title" property="title"/>
+        <result column="goods_type" property="goodsType"/>
+        <result column="location" property="location"/>
+        <result column="description" property="description"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select * from post
+        <if test="type != null">
+            where type = #{type}
+        </if>
+        order by create_time desc
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from post where post_id = #{postId}
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select * from post where user_id = #{userId} order by create_time desc
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="postId">
+        insert into post(user_id,type,title,goods_type,location,description,img_url,status,create_time)
+        values(#{userId},#{type},#{title},#{goodsType},#{location},#{description},#{imgUrl},#{status},#{createTime})
+    </insert>
+
+    <update id="update">
+        update post
+        <set>
+            <if test="title != null">title = #{title},</if>
+            <if test="goodsType != null">goods_type = #{goodsType},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="imgUrl != null">img_url = #{imgUrl},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where post_id = #{postId}
+    </update>
+
+    <update id="updateStatus">
+        update post set status = #{status} where post_id = #{postId}
+    </update>
+
+    <delete id="deleteById">
+        delete from post where post_id = #{postId}
+    </delete>
+</mapper>
