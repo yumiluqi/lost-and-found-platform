@@ -27,10 +27,11 @@ public class WebConfig implements WebMvcConfigurer {
                 );
     }
 
-    /** 静态资源映射：上传的图片可以通过URL访问 */
+    /** 静态资源映射：上传的图片可以通过URL访问，和UploadController使用完全一致的动态路径，避免相对路径找不到文件 */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String uploadPath = System.getProperty("user.dir") + "/upload/";
         registry.addResourceHandler("/upload/**")
-                .addResourceLocations("file:./upload/");
+                .addResourceLocations("file:" + uploadPath);
     }
 }
