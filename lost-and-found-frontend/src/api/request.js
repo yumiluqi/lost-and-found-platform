@@ -3,7 +3,7 @@ import { ElMessage } from 'element-plus'
 import router from '@/router'
 
 // 导出图片基础路径，以后换 IP 只改这里
-export const IMG_BASE_URL = 'http://172.23.48.86:8080'
+export const IMG_BASE_URL = 'http://192.168.245.88:8080'
 
 // 创建 axios 实例
 const request = axios.create({

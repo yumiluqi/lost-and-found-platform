@@ -20,7 +20,7 @@
           <el-card shadow="hover" class="item-card" @click="goToDetail(item.postId)" style="cursor: pointer;">
             <div class="item-image">
               <!-- 3. 注意这里的图片路径，如果你的代理生效了，最好把 http://localhost:8080 换成你的后端实际IP(或者留空测试) -->
-              <img v-if="item.imgUrl" :src="IMG_BASE_URL + item.imgUrl" alt="物品图片" />
+              <img v-if="item.imgUrl" :src="'/api' + item.imgUrl" alt="物品图片" />
               <span v-else>📦 暂无图片</span>
             </div>
             <div class="item-info">
@@ -47,7 +47,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { getPostList } from '@/api/post'
-import { IMG_BASE_URL } from '@/api/request' 
+
 
 const router = useRouter()
 const loading = ref(false)
