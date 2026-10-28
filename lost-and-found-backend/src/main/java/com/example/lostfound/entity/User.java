@@ -9,6 +9,5 @@ public class User {
     private String username;
     private String password;
     private String phone;
-    private Integer role;
     private Date createTime;
 }
