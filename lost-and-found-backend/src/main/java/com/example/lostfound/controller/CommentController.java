@@ -15,11 +15,13 @@ public class CommentController {
     @Resource
     private CommentService commentService;
 
+    // 查询某个帖子下的评论
     @GetMapping("/list")
     public Result<List<Comment>> list(@RequestParam Integer postId) {
         return Result.success("查询成功", commentService.getCommentsByPostId(postId));
     }
 
+    // 发表评论
     @PostMapping("/add")
     public Result<Void> add(@RequestBody Comment comment, HttpServletRequest request) {
         // 从拦截器里取出当前登录用户ID
@@ -29,6 +31,7 @@ public class CommentController {
         return res ? Result.success("评论成功", null) : Result.error(500, "评论失败");
     }
 
+    // 删除评论（只能删自己的）
     @DeleteMapping("/{commentId}")
     public Result<Void> delete(@PathVariable Integer commentId, HttpServletRequest request) {
         Integer userId = (Integer) request.getAttribute("userId");

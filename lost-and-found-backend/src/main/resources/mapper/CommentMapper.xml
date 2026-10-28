@@ -25,12 +25,4 @@
     <delete id="deleteById">
         delete from comment where comment_id = #{commentId}
     </delete>
-
-    <delete id="deleteByPostId">
-        delete from comment where post_id = #{postId}
-    </delete>
-
-    <delete id="deleteByUserId">
-        delete from comment where user_id = #{userId}
-    </delete>
 </mapper>

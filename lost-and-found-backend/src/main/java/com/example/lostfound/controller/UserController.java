@@ -16,12 +16,13 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    // 用户登录：校验账号密码，成功后签发token
     @PostMapping("/login")
     public Result<Map<String, Object>> login(@RequestBody User user) {
         User loginUser = userService.login(user.getUsername(), user.getPassword());
         if (loginUser != null) {
             // 生成token
-            String token = JwtUtil.createToken(loginUser.getUserId(), loginUser.getUsername(), loginUser.getRole());
+            String token = JwtUtil.createToken(loginUser.getUserId(), loginUser.getUsername());
             Map<String, Object> data = new HashMap<>();
             data.put("token", token);
             data.put("userInfo", loginUser);
@@ -30,6 +31,7 @@ public class UserController {
         return Result.error(401, "用户名或密码错误");
     }
 
+    // 用户注册
     @PostMapping("/register")
     public Result<Void> register(@RequestBody User user) {
         boolean success = userService.register(user);
@@ -39,6 +41,7 @@ public class UserController {
         return Result.error(400, "用户名已存在");
     }
 
+    // 根据id查询用户信息
     @GetMapping("/{userId}")
     public Result<User> getById(@PathVariable Integer userId) {
         User user = userService.getById(userId);

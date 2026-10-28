@@ -10,10 +10,8 @@ public interface PostMapper {
     List<Post> selectList(@Param("type") Integer type);
     Post selectById(Integer postId);
     List<Post> selectByUserId(Integer userId);
-    List<Post> selectAll();
     int insert(Post post);
     int update(Post post);
     int updateStatus(@Param("postId") Integer postId, @Param("status") Integer status);
     int deleteById(Integer postId);
-    int deleteByUserId(Integer userId);
 }

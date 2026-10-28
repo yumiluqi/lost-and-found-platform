@@ -21,12 +21,11 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    /** 生成token，传入用户ID和角色 */
-    public static String createToken(Integer userId, String username, Integer role) {
+    /** 生成token，传入用户ID */
+    public static String createToken(Integer userId, String username) {
         return Jwts.builder()
                 .claim("userId", userId)
                 .claim("username", username)
-                .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
