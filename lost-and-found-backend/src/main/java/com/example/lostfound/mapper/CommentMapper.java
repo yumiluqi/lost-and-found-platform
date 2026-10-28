@@ -10,4 +10,6 @@ public interface CommentMapper {
     Comment selectById(Integer commentId);
     int insert(Comment comment);
     int deleteById(Integer commentId);
+    int deleteByPostId(Integer postId);
+    int deleteByUserId(Integer userId);
 }

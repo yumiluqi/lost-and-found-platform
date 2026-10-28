@@ -6,6 +6,7 @@
         <result column="username" property="username"/>
         <result column="password" property="password"/>
         <result column="phone" property="phone"/>
+        <result column="role" property="role"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
 
@@ -27,7 +28,16 @@
         <set>
             <if test="phone != null">phone = #{phone},</if>
             <if test="password != null">password = #{password},</if>
+            <if test="role != null">role = #{role},</if>
         </set>
         where user_id = #{userId}
     </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from user order by create_time desc
+    </select>
+
+    <delete id="deleteById">
+        delete from user where user_id = #{userId}
+    </delete>
 </mapper>

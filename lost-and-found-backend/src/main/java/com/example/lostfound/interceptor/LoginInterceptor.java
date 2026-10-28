@@ -34,6 +34,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         // 把用户ID存到request里，Controller可以直接取
         request.setAttribute("userId", claims.get("userId"));
+        request.setAttribute("role", claims.get("role"));
         return true;
     }
 

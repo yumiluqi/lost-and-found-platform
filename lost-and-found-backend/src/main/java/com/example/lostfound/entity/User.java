@@ -9,5 +9,6 @@ public class User {
     private String username;
     private String password;
     private String phone;
+    private Integer role;      // 0=普通用户 1=管理员
     private Date createTime;
 }

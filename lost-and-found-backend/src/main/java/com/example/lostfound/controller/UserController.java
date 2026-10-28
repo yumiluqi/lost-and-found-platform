@@ -21,7 +21,7 @@ public class UserController {
         User loginUser = userService.login(user.getUsername(), user.getPassword());
         if (loginUser != null) {
             // 生成token
-            String token = JwtUtil.createToken(loginUser.getUserId(), loginUser.getUsername());
+            String token = JwtUtil.createToken(loginUser.getUserId(), loginUser.getUsername(), loginUser.getRole());
             Map<String, Object> data = new HashMap<>();
             data.put("token", token);
             data.put("userInfo", loginUser);

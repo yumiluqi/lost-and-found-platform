@@ -5,6 +5,7 @@ import com.example.lostfound.mapper.UserMapper;
 import com.example.lostfound.service.UserService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,6 +34,10 @@ public class UserServiceImpl implements UserService {
         if (exist != null) {
             return false;
         }
+        // 默认注册为普通用户
+        if (user.getRole() == null) {
+            user.setRole(0);
+        }
         return userMapper.insert(user) > 0;
     }
 
@@ -43,5 +48,31 @@ public class UserServiceImpl implements UserService {
             user.setPassword(null);
         }
         return user;
+    }
+
+    @Override
+    public List<User> listAll() {
+        List<User> list = userMapper.selectAll();
+        if (list != null) {
+            for (User u : list) {
+                u.setPassword(null); // 隐藏密码
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public boolean deleteUser(Integer userId) {
+        return userMapper.deleteById(userId) > 0;
+    }
+
+    @Override
+    public boolean updateRole(Integer userId, Integer role) {
+        User user = userMapper.selectById(userId);
+        if (user == null) {
+            return false;
+        }
+        user.setRole(role);
+        return userMapper.update(user) > 0;
     }
 }

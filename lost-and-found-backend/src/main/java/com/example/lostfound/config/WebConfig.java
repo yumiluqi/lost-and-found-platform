@@ -1,5 +1,6 @@
 package com.example.lostfound.config;
 
+import com.example.lostfound.interceptor.AdminInterceptor;
 import com.example.lostfound.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -25,6 +26,10 @@ public class WebConfig implements WebMvcConfigurer {
                         "/upload/**",       // 上传的图片
                         "/error"
                 );
+
+        // 管理员拦截器：拦截 /admin/**，必须登录且role=1
+        registry.addInterceptor(new AdminInterceptor())
+                .addPathPatterns("/admin/**");
     }
 
     /** 静态资源映射：上传的图片可以通过URL访问，和UploadController使用完全一致的动态路径，避免相对路径找不到文件 */
