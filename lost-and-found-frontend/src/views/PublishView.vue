@@ -40,7 +40,7 @@
             <el-upload
               v-if="!form.imgUrl"
               class="upload-demo"
-              action="IMG_BASE_URL + '/upload'"
+              action="/api/upload"
               :headers="{ Authorization: userStore.token }"
               :on-success="handleUploadSuccess"
               :on-error="handleUploadError"
@@ -52,7 +52,7 @@
             
             <!-- 如果已经有图片了，显示图片预览和删除按钮 -->
             <div v-else class="image-preview-box">
-              <img :src="'IMG_BASE_URL + form.imgUrl' + form.imgUrl" alt="预览图" />
+              <img :src="'/api' + form.imgUrl" alt="预览图" />
               <!-- 悬浮的删除按钮 -->
               <div class="delete-mask" @click="removeImage">
                 <el-icon><Delete /></el-icon> 删除
@@ -81,7 +81,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { addPost } from '@/api/post'
 import { ElMessage } from 'element-plus'
-import { IMG_BASE_URL } from '@/api/request' 
+
 
 const router = useRouter()
 const userStore = useUserStore()

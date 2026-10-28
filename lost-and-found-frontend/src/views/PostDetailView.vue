@@ -18,7 +18,8 @@
         <p><strong>地点：</strong> {{ postInfo.location }}</p>
         <p><strong>时间：</strong> {{ formatTime(postInfo.createTime) }}</p>
         <p><strong>描述：</strong> {{ postInfo.description }}</p>
-        <img v-if="postInfo.imgUrl" :src="IMG_BASE_URL + postInfo.imgUrl" class="detail-img" />
+        <!-- 这里的图片路径是走 /api 代理的 -->
+        <img v-if="postInfo.imgUrl" :src="'/api' + postInfo.imgUrl" class="detail-img" />
       </div>
 
       <!-- 仅本人可见的操作按钮 -->
@@ -58,7 +59,6 @@ import { useUserStore } from '@/stores/user'
 import { getPostDetail, claimPost, deletePost } from '@/api/post'
 import { getCommentList, addComment } from '@/api/comment'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { IMG_BASE_URL } from '@/api/request' 
 
 const route = useRoute()
 const router = useRouter()

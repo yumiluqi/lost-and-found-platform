@@ -19,7 +19,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://172.23.48.86:8080', // 指向你队友的后端地址
+        target: 'http://192.168.245.88:8080', // 指向你队友的后端地址
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '') // 把 /api 替换为空
       }
