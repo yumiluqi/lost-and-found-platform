@@ -5,6 +5,7 @@ import com.example.lostfound.entity.Post;
 import com.example.lostfound.service.PostService;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -38,7 +39,10 @@ public class PostController {
 
     // 发布帖子
     @PostMapping("/add")
-    public Result<Void> add(@RequestBody Post post) {
+    public Result<Void> add(@RequestBody Post post, HttpServletRequest request) {
+        // 从拦截器里取出当前登录用户ID
+        Integer userId = (Integer) request.getAttribute("userId");
+        post.setUserId(userId);
         boolean success = postService.add(post);
         return success ? Result.success("发布成功", null) : Result.error(500, "发布失败");
     }

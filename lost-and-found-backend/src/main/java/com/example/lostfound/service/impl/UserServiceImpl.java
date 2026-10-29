@@ -33,6 +33,10 @@ public class UserServiceImpl implements UserService {
         if (exist != null) {
             return false;
         }
+        // 注册默认是普通用户
+        if (user.getRole() == null) {
+            user.setRole(0);
+        }
         return userMapper.insert(user) > 0;
     }
 

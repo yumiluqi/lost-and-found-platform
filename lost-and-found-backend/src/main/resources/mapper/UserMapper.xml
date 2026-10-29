@@ -6,6 +6,7 @@
         <result column="username" property="username"/>
         <result column="password" property="password"/>
         <result column="phone" property="phone"/>
+        <result column="role" property="role"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
 
@@ -18,8 +19,8 @@
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="userId">
-        insert into user(username,password,phone)
-        values(#{username},#{password},#{phone})
+        insert into user(username,password,phone,role)
+        values(#{username},#{password},#{phone},#{role})
     </insert>
 
     <update id="update">
